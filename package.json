@@ -1,5 +1,6 @@
 {
   "name": "inventorymanagement",
+  "type": "module",
   "version": "1.0.0",
   "description": "Created by vipul gupta\t",
   "main": "index.js",
