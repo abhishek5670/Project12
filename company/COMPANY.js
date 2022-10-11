@@ -5,7 +5,7 @@ const dataSchema = new mongoose.Schema({
     //_id : Number,
     Company_name:{
         required:true,
-        // unique:true,
+        unique:true,
         // background: true,
         uppercase: true,
         type:String

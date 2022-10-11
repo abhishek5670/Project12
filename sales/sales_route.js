@@ -1,16 +1,16 @@
 import express from "express";
 
-import companies from "../company/COMPANY.js";
-const CI = express.Router();
+import Supplier from "../sales/sales.js";
+const SR = express.Router();
 
+SR.post('/post', async (req, res) => {
 
-CI.post('/post', async (req, res) => {
-   // console.log('comapanyname')
-    const data = new companies({
-        Company_name: req.body.Company_name,
-        Phone_number: req.body.Phone_number,
+    const data = new Supplier({
+        Name:req.body.Name,
         Email:req.body.Email,
-        Address:req.body.Address,   
+        Phone:req.body.Phone,
+        BillingAddress:req.body.BillingAddress,
+        ShippingAddress:req.body.ShippingAddress
     })
 
     try {
@@ -22,22 +22,9 @@ CI.post('/post', async (req, res) => {
     }
 })
 
-//Get all Method
-CI.get('/getAll', async (req, res) => {
+SR.get('/getAll', async (req, res) => {
     try {
-        const data = await CI.find();
-        res.json(data);
-      //  const risk = await Risk.findById(req.params.riskId).populate("Company")
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-})
-
-//Get by ID Method
-CI.get('/getOne/:id', async (req, res) => {
-    try {
-        const data = await CI.findById(req.params.id);
+        const data = await Supplier.find();
         res.json(data)
     }
     catch (error) {
@@ -45,14 +32,23 @@ CI.get('/getOne/:id', async (req, res) => {
     }
 })
 
-//Update by ID Method
-CI.patch('/update/:id', async (req, res) => {
+//Get by ID Method
+SR.get('/getOne/:id', async (req, res) => {
+    try {
+        const data = await Supplier.findById(req.params.id);
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+SR.patch('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.body;
         const options = { new: true };
 
-        const result = await CI.findByIdAndUpdate(
+        const result = await Supplier.findByIdAndUpdate(
             id, updatedData, options
         )
 
@@ -63,11 +59,10 @@ CI.patch('/update/:id', async (req, res) => {
     }
 })
 
-//Delete by ID Method
-CI.delete('/delete/:id', async (req, res) => {
+SR.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const data = await CI.findByIdAndDelete(id)
+        const data = await Supplier.findByIdAndDelete(id)
         res.send(`Document with ${data.name} has been deleted..`)
     }
     catch (error) {
@@ -75,4 +70,4 @@ CI.delete('/delete/:id', async (req, res) => {
     }
 })
 
-export default CI;
+export default SR;
