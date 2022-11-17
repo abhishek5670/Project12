@@ -1,5 +1,6 @@
+In date.js
 we created 'create' schema to get user:-
-1. user name.
+1. ser name.
 2. created date.
 3. updated date.
 4. subscription(which default value true).
