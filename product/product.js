@@ -1,14 +1,10 @@
-import { mongoose } from 'mongoose';
-import {nanoid} from 'nanoid';
+import  mongoose from 'mongoose';
+const { Schema} = mongoose
+//import {nanoid} from 'nanoid';
 
 const dataSchema = new mongoose.Schema({
-    Product_name: randomBytes(8).toString('hex'),
-    uniqueID:{
-        required: true,
-        type: Number,
-        default: () => nanoid(3),
-        index: {unique :true}
-    },
+    Product_name: {type:String},
+
     MRP: {
         required: true,
         type: Number
@@ -17,38 +13,48 @@ const dataSchema = new mongoose.Schema({
         required: true,
         type: Number
     },
-    CATEGORY:{
-        required : true,
-        type : String
+    // CATEGORY:{
+    //     required : true,
+    //     type : String
 
-    },
-    LOW:{
-        required : true,
-        type: Number
-    },
-    //NOEMAL:{
-      //  required: true,
-        //type: Number
-    //},
-    HIGH:{
+    // },
+    // LOW:{
+    //     required : true,
+    //     type: Number
+    // },
+    // //NOEMAL:{
+    //   //  required: true,
+    //     //type: Number
+    // //},
+    // HIGH:{
+    //     required: true,
+    //     type: Number
+    // },
+    // Purchasing_detail:{
+    //     required: true,
+    //     type:String
+    // },
+    // Cost_price:{
+    //     required : true,
+    //     type: Number
+    // },
+    // Selling_price:{
+    //     required:true,
+    //     type: Number
+    // },
+    // Tax_details:{
+    //     required:true,
+    //     type: Number
+    // }
+    warehouse:[{
+        type : Schema.Types.ObjectId,
+        ref :'Warehouse',
         required: true,
-        type: Number
-    },
-    Purchasing_detail:{
-        required: true,
-        type:String
-    },
-    Cost_price:{
-        required : true,
-        type: Number
-    },
-    Selling_price:{
-        required:true,
-        type: Number
-    },
-    Tax_details:{
-        required:true,
-        type: Number
+
+    }],
+    WN:{
+        type:String,
+        required:true
     }
 
 })

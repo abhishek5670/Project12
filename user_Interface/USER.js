@@ -47,11 +47,11 @@ const dataSchema = new Schema({
      type: Number
     },
 
-    company:{
+    company:[{
         type : Schema.Types.ObjectId,
         ref :'companies',
         required: true,
-    },
+    }],
     created_date: {type:Date, default:Date.now, timezone:'+530' },
     count:{required:true,
         type:Boolean, 

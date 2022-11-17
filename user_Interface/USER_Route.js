@@ -14,7 +14,7 @@ UI.post('/post', async (req, res,next) => {
     //     console.log(new Date().toLocaleString());
     //   });
     const search = req.body.Company_name;
-    //const a = search.replace(/\s+/g,'')
+    const a = search.replace(/\s+/g,'')
     const b =await companies.find({Company_name:{$regex:search,$options:'i'}})
     console.log("b...........",b[0]._id.toString())
 
