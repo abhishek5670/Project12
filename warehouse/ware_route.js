@@ -1,16 +1,14 @@
 import express from "express";
 
-import companies from "../company/COMPANY.js";
-const CI = express.Router();
+import Warehouse from "./warehouse.js";
+const WI = express.Router();
 
 
-CI.post('/post', async (req, res) => {
+WI.post('/post', async (req, res) => {
    // console.log('comapanyname')
-    const data = new companies({
-        Company_name: req.body.Company_name,
-        Phone_number: req.body.Phone_number,
-        Email:req.body.Email,
-        Address:req.body.Address,   
+    const data = new Warehouse({
+        WN: req.body.WN,
+        Phone: req.body.Phone,
     })
 
     try {
@@ -23,9 +21,9 @@ CI.post('/post', async (req, res) => {
 })
 
 //Get all Method
-CI.get('/getAll', async (req, res) => {
+WI.get('/getAll', async (req, res) => {
     try {
-        const data = await CI.find();
+        const data = await WI.find();
         res.json(data);
       //  const risk = await Risk.findById(req.params.riskId).populate("Company")
     }
@@ -35,9 +33,9 @@ CI.get('/getAll', async (req, res) => {
 })
 
 //Get by ID Method
-CI.get('/getOne/:id', async (req, res) => {
+WI.get('/getOne/:id', async (req, res) => {
     try {
-        const data = await CI.findById(req.params.id);
+        const data = await WI.findById(req.params.id);
         res.json(data)
     }
     catch (error) {
@@ -46,13 +44,13 @@ CI.get('/getOne/:id', async (req, res) => {
 })
 
 //Update by ID Method
-CI.patch('/update/:id', async (req, res) => {
+WI.patch('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.body;
         const options = { new: true };
 
-        const result = await CI.findByIdAndUpdate(
+        const result = await WI.findByIdAndUpdate(
             id, updatedData, options
         )
 
@@ -64,10 +62,10 @@ CI.patch('/update/:id', async (req, res) => {
 })
 
 //Delete by ID Method
-CI.delete('/delete/:id', async (req, res) => {
+WI.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const data = await CI.findByIdAndDelete(id)
+        const data = await WI.findByIdAndDelete(id)
         res.send(`Document with ${data.name} has been deleted..`)
     }
     catch (error) {
@@ -75,4 +73,4 @@ CI.delete('/delete/:id', async (req, res) => {
     }
 })
 
-export default CI;
+export default WI;
